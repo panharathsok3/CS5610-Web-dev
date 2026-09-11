@@ -80,6 +80,7 @@
 
   <p>Fun Fact: This is how many times I've been to the moon</p>
   <button id="fact-button">The Moon??</button>
+  <p id="moon-text"></p>
 
   <script>
     let moon_traveled = 100;
@@ -89,12 +90,11 @@
 
     button.addEventListener("click", () => {
       if (moon_traveled > 0) {
-        moon_traveled = moon_traveled - 1;
         moonText.textContent = `I have been to the moon ${moon_traveled} times`;
+        moon_traveled = moon_traveled - 1;
       }
     });
     </script>
-  
-  <p id="moon-text"></p>
+
 </body>
 </html>
