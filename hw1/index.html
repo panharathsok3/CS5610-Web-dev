@@ -30,6 +30,18 @@
       padding: 10px;
     }
 
+    button {
+      font: inherit;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    #fun-fact {
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
     
   </style>
 
@@ -65,5 +77,24 @@
       <td>The reason I am here now</td>
     </tr>
   </table>
+
+  <p>Fun Fact: This is how many times I've been to the moon</p>
+  <button id="fact-button">The Moon??</button>
+
+  <script>
+    let moon_traveled = 100;
+
+    const button = document.getElementById("fact-button");
+    const moonText = document.getElementById("moon-text");
+
+    button.addEventListener("click", () => {
+      if (moon_traveled > 0) {
+        moon_traveled = moon_traveled - 1;
+        moonText.textContent = `I have been to the moon ${moon_traveled} times`;
+      }
+    });
+    </script>
+  
+  <p id="moon-text"></p>
 </body>
 </html>
