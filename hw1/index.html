@@ -89,10 +89,18 @@
     const moonText = document.getElementById("moon-text");
 
     button.addEventListener("click", () => {
-      if (moon_traveled > 0) {
-        moonText.textContent = `I have been to the moon ${moon_traveled} times`;
+      moonText.textContent = `I have been to the moon ${moon_traveled} times`;
+
+      const countdown = setInterval(() => {
         moon_traveled = moon_traveled - 1;
-      }
+
+        moonText.textContent = `I have been to the moon ${moon_traveled} times`;
+
+        if (moon_traveled === 0) {
+          clearInterval(countdown);
+        }
+
+      }, 1000);
     });
     </script>
 
