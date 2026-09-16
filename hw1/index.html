@@ -22,12 +22,49 @@
       margin-top: 0.25rem;
     }
 
-    table, th, td {
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
       border: 1px solid black;
-      border-collapse: collapse; /* Merges adjacent cell borders into a single line */
     }
-    th, td {
+
+    .grid > div {
+      border: 1px solid black;
       padding: 10px;
+    }
+
+    .header {
+      font-weight: bold;
+    }
+
+    .tft-image {
+      max-width: 100%;
+      height: auto;
+
+      transition: transform 0.3s;
+    }
+
+    .tft-image:hover {
+      transform: scale(1.05);
+    }
+
+    .confetti {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      pointer-events: none;
+
+      animation: fall 2s linear forwards;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(100vh);
+      }
     }
 
     button {
@@ -47,6 +84,7 @@
 
 </head>
 <body>
+  <!--Intro-->
   <h1>Panharath Sok</h1>
   <p class="title">Bachelor's in Computer Science, Khoury College Student</p>
 
@@ -55,43 +93,83 @@
     learn about new things that interests me. This includes:
   </p>
 
-  <table>
-    <tr>
-      <th>Interests</th>
-      <th>What I did</th>
-    </tr>
-    <tr>
-      <td>Psychology</td>
-      <td>I went became a research asistant at Bex Lab which is a Psychology Lab focused on Vision
-        where I also had the opportunity to work with Harvard Medical School on an Amblyopia study.
-      </td>
-    </tr>
-    <tr>
-      <td>Team Fight Tactics</td>
-      <td>This is a game that I play with people but I also compete in and I recently won in a torunament
-        after a lot of hard work. <img src="https://pbs.twimg.com/media/HQXeb7WXMAAW7Ls?format=jpg&name=small" style="max-width: 100%; height: auto;">
-      </td>
-    </tr>
-    <tr>
-      <td>Web development</td>
-      <td>The reason I am here now</td>
-    </tr>
-  </table>
+  <!--Grid layout for the table-->
+  <div class="grid">
 
+    <div class="header">Interests</div>
+    <div class="header">What I did</div>
+
+    <div>Psychology</div>
+    <div>
+      I became a research assistant at Bex Lab, which is a Psychology Lab
+      focused on Vision, where I also had the opportunity to work with
+      Harvard Medical School on an Amblyopia study.
+    </div>
+
+    <div>Team Fight Tactics</div>
+    <div>
+      This is a game that I play with people, but I also compete in it.
+      I recently won a tournament after a lot of hard work.
+
+      <img 
+        class="tft-image" 
+        src="https://pbs.twimg.com/media/HQXeb7WXMAAW7Ls?format=jpg&name=small"
+        style="max-width: 100%; height: auto;"
+      >
+    </div>
+
+    <div>Web Development</div>
+    <div>
+      The reason I am here now
+    </div>
+
+  </div>
+
+  <!--Fun fact-->
   <p>Fun Fact: This is how many times I've been to the moon</p>
   <button id="fact-button">The Moon??</button>
   <p id="moon-text"></p>
 
   <script>
+    <!--Image-->
+    const tftImage = document.querySelector(".tft-image");
+
+    tftImage.addEventListener("mouseenter", () => {
+
+      for (let i = 0; i < 50; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.classList.add("confetti");
+        confetti.textContent = "🎉";
+
+        confetti.style.left = Math.random() * 100 + "vw";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 2000);
+      }
+
+    });
+
+
+    <!--Moon Button-->
     let moon_traveled = 100;
+    let countdown;
 
     const button = document.getElementById("fact-button");
     const moonText = document.getElementById("moon-text");
 
     button.addEventListener("click", () => {
+
+      clearInterval(countdown);
+      moon_traveled = 100;
+
       moonText.textContent = `I have been to the moon ${moon_traveled} times`;
 
-      const countdown = setInterval(() => {
+      countdown = setInterval(() => {
         moon_traveled = moon_traveled - 1;
 
         moonText.textContent = `I have been to the moon ${moon_traveled} times`;
@@ -100,9 +178,9 @@
           clearInterval(countdown);
         }
 
-      }, 100);
+      }, 80);
     });
-    </script>
+  </script>
 
 </body>
 </html>
